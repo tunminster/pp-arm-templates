@@ -80,7 +80,7 @@
                 "tier": "[parameters('tier')]"
               },
             "dependsOn": [
-              "[variables('sqlServerName')]"
+              "[parameters('sqlServerName')]"
             ],
             "resources": [
               {
