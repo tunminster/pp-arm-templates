@@ -32,22 +32,17 @@
           "description": "Location for all resources."
         }
       },
-      "tier": {
-        "type": "string"
-      },
-      "skuName": {
-        "type": "string"
-      },
       "sqlServerName":{
-         "type": "string"
+          "type": "string"
       },
       "databaseName":{
           "type": "string"
       }
     },
     "variables": {
+      "databaseEdition": "Standard",
       "databaseCollation": "SQL_Latin1_General_CP1_CI_AS",
-      "creator": "tunhein@paypoint.com"
+      "databaseServiceObjectiveName": "S1"
     },
     "resources": [
       {
@@ -70,15 +65,14 @@
             "apiVersion": "2015-01-01",
             "location": "[parameters('location')]",
             "tags": {
-              "creator": "[variables('creator')]"
+              "displayName": "Database"
             },
             "properties": {
-              "collation": "[variables('databaseCollation')]"
+              "edition": "[variables('databaseEdition')]",
+              "collation": "[variables('databaseCollation')]",
+              "requestedServiceObjectiveName": "[variables('databaseServiceObjectiveName')]"
             },
-            "sku": {
-                "name": "[parameters('skuName')]",
-                "tier": "[parameters('tier')]"
-              },
+            
             "dependsOn": [
               "[parameters('sqlServerName')]"
             ],
