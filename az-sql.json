@@ -42,7 +42,10 @@
     "variables": {
       "databaseEdition": "Standard",
       "databaseCollation": "SQL_Latin1_General_CP1_CI_AS",
-      "databaseServiceObjectiveName": "S1"
+      "databaseServiceObjectiveName": "S1",
+      "creator": "tunhein@paypoint.com",
+      "environment": "Development",
+      "service": "epos"
     },
     "resources": [
       {
@@ -51,7 +54,9 @@
         "apiVersion": "2014-04-01-preview",
         "location": "[parameters('location')]",
         "tags": {
-          "displayName": "SqlServer"
+          "creator": "[variables('creator')]",
+          "environment": "[variables('environment')]",
+          "service": "[variables('service')]"
         },
         "properties": {
           "administratorLogin": "[parameters('sqlAdministratorLogin')]",
@@ -65,7 +70,9 @@
             "apiVersion": "2015-01-01",
             "location": "[parameters('location')]",
             "tags": {
-              "displayName": "Database"
+              "creator": "[variables('creator')]",
+              "environment": "[variables('environment')]",
+              "service": "[variables('service')]"
             },
             "properties": {
               "edition": "[variables('databaseEdition')]",
