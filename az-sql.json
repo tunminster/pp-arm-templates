@@ -37,12 +37,18 @@
       },
       "databaseName":{
           "type": "string"
+      },
+      "databaseEdition":{
+        "type": "string",
+        "defaultValue": "Standard"
+      },
+      "databaseServiceObjectiveName":{
+        "type": "string",
+        "defaultValue": "S1"
       }
     },
     "variables": {
-      "databaseEdition": "Standard",
       "databaseCollation": "SQL_Latin1_General_CP1_CI_AS",
-      "databaseServiceObjectiveName": "S1",
       "creator": "tunhein@paypoint.com",
       "environment": "Development",
       "service": "epos"
@@ -75,9 +81,9 @@
               "service": "[variables('service')]"
             },
             "properties": {
-              "edition": "[variables('databaseEdition')]",
+              "edition": "[parameters('databaseEdition')]",
               "collation": "[variables('databaseCollation')]",
-              "requestedServiceObjectiveName": "[variables('databaseServiceObjectiveName')]"
+              "requestedServiceObjectiveName": "[parameters('databaseServiceObjectiveName')]"
             },
             
             "dependsOn": [
