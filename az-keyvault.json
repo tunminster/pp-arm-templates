@@ -99,7 +99,52 @@
         "metadata": {
           "description": "Specifies whether the key vault is a standard vault or a premium vault."
         }
+      },
+      
+      "secretName1":{
+        "type": "string",
+        "defaultValue": "epos-dev-sub-client-id",
+        "metadata": {
+            "description": "App registration client id's secret name"
+        }
+      },
+      "secretValue1":{
+          "type" : "string",
+          "metadata": {
+              "description": "App registration client id" 
+          }
+      },
+
+      "secretName2":{
+        "type": "string",
+        "defaultValue": "epos-dev-sub-object-id",
+        "metadata": {
+            "description": "App registration object id's secret name"
+        }
+      },
+      "secretValue2":{
+          "type": "string",
+          "defaultValue": "",
+          "metadata": {
+              "description": "App registration object id"
+          }
+      },
+
+      "secretName3":{
+          "type": "string",
+          "defaultValue": "epos-dev-sub-client-secret",
+          "metadata": {
+              "description": "App registration client secret's name"
+          }
+      },
+      "secretValue3":{
+          "type": "string",
+          "defaultValue": "",
+          "metadata": {
+              "description": "App registration client secret"
+          }
       }
+      
     
     },
     "resources": [
@@ -132,7 +177,44 @@
               "bypass": "AzureServices"
           }
         }
+      },
+      {
+        "type": "Microsoft.KeyVault/vaults/secrets",
+        "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName1'))]",
+        "apiVersion": "2018-02-14",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+        ],
+        "properties": {
+          "value": "[parameters('secretValue1')]"
+        }
+      },
+      {
+        "type": "Microsoft.KeyVault/vaults/secrets",
+        "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName2'))]",
+        "apiVersion": "2018-02-14",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+        ],
+        "properties": {
+          "value": "[parameters('secretValue2')]"
+        }
+      },
+      {
+        "type": "Microsoft.KeyVault/vaults/secrets",
+        "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName3'))]",
+        "apiVersion": "2018-02-14",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+        ],
+        "properties": {
+          "value": "[parameters('secretValue3')]"
+        }
       }
+
       
     ]
   }
