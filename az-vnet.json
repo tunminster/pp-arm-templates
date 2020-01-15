@@ -4,7 +4,7 @@
     "parameters": {
       "vnetName": {
         "type": "string",
-        "defaultValue": "epos-dev-vnet",
+        "defaultValue": "epos-vnet-suk-dev",
         "metadata": {
           "description": "VNet name"
         }
