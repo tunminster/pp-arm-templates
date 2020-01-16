@@ -1,0 +1,6 @@
+#Generate guid key.
+python -c 'import uuid; print str(uuid.uuid1())'
+
+
+#Docker run locally
+docker build -t t1 -f src/Epos.MigrationBridge.Api/Dockerfile .
