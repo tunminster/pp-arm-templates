@@ -4,3 +4,17 @@ python -c 'import uuid; print str(uuid.uuid1())'
 
 #Docker run locally
 docker build -t t1 -f src/Epos.MigrationBridge.Api/Dockerfile .
+
+# Generate Kubernetes dashboard login key
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+
+
+#Merge locally
+To solve this:
+press “i”
+write your merge message.
+press “esc”
+write “:wq”
+then press enter.
