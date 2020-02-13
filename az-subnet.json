@@ -1,0 +1,88 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingVNETName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the VNET to add a subnet to"
+        }
+      },
+      "aksSubnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the subnet to add"
+        }
+      },
+      "aksSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.183.32.0/21",
+        "metadata": {
+          "description": "Address space of the subnet to add"
+        }
+      },
+      "rabbitSubnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the subnet to add"
+        }
+      },
+      "rabbitSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.183.40.0/25",
+        "metadata": {
+          "description": "Address space of the subnet to add"
+        }
+      },
+      "vmTestStreamSubnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the subnet to add"
+        }
+      },
+      "vmTestStreamSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.183.56.0/26",
+        "metadata": {
+          "description": "Address space of the subnet to add"
+        }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+    },
+    "resources": [
+      {
+        "apiVersion": "2018-04-01",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(parameters('existingVNETName'), '/', parameters('aksSubnetName'))]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "addressPrefix": "[parameters('aksSubnetAddressPrefix')]"
+        }
+      },
+      {
+        "apiVersion": "2018-04-01",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(parameters('existingVNETName'), '/', parameters('rabbitSubnetName'))]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "addressPrefix": "[parameters('rabbitSubnetAddressPrefix')]"
+        }
+      },
+      {
+        "apiVersion": "2018-04-01",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(parameters('existingVNETName'), '/', parameters('vmTestStreamSubnetName'))]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "addressPrefix": "[parameters('vmTestStreamSubnetAddressPrefix')]"
+        }
+      }
+    ],
+    "outputs": {}
+  }

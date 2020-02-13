@@ -41,6 +41,12 @@
       "productDatabaseName":{
         "type": "string"
       },
+      "migrationDatabaseName":{
+        "type": "string"
+      },
+      "clientMessageDatabaseName":{
+        "type": "string"
+      },
       "databaseEdition":{
         "type": "string",
         "defaultValue": "Standard"
@@ -137,6 +143,74 @@
                 },
                 "dependsOn": [
                   "[parameters('productDatabaseName')]"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "[parameters('migrationDatabaseName')]",
+            "type": "databases",
+            "apiVersion": "2015-01-01",
+            "location": "[parameters('location')]",
+            "tags": {
+              "creator": "[variables('creator')]",
+              "environment": "[variables('environment')]",
+              "service": "[variables('service')]"
+            },
+            "properties": {
+              "edition": "[parameters('databaseEdition')]",
+              "collation": "[variables('databaseCollation')]",
+              "requestedServiceObjectiveName": "[parameters('databaseServiceObjectiveName')]"
+            },
+            
+            "dependsOn": [
+              "[parameters('sqlServerName')]"
+            ],
+            "resources": [
+              {
+                "comments": "Transparent Data Encryption",
+                "name": "current",
+                "type": "transparentDataEncryption",
+                "apiVersion": "2014-04-01-preview",
+                "properties": {
+                  "status": "[parameters('transparentDataEncryption')]"
+                },
+                "dependsOn": [
+                  "[parameters('migrationDatabaseName')]"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "[parameters('clientMessageDatabaseName')]",
+            "type": "databases",
+            "apiVersion": "2015-01-01",
+            "location": "[parameters('location')]",
+            "tags": {
+              "creator": "[variables('creator')]",
+              "environment": "[variables('environment')]",
+              "service": "[variables('service')]"
+            },
+            "properties": {
+              "edition": "[parameters('databaseEdition')]",
+              "collation": "[variables('databaseCollation')]",
+              "requestedServiceObjectiveName": "[parameters('databaseServiceObjectiveName')]"
+            },
+            
+            "dependsOn": [
+              "[parameters('sqlServerName')]"
+            ],
+            "resources": [
+              {
+                "comments": "Transparent Data Encryption",
+                "name": "current",
+                "type": "transparentDataEncryption",
+                "apiVersion": "2014-04-01-preview",
+                "properties": {
+                  "status": "[parameters('transparentDataEncryption')]"
+                },
+                "dependsOn": [
+                  "[parameters('clientMessageDatabaseName')]"
                 ]
               }
             ]
